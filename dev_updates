@@ -1,0 +1,30 @@
+filldates - store procedure
+
+CREATE TABLE MyDates
+(
+  mydate date
+);
+
+CREATE PROCEDURE filldates(dateStart DATE, dateEnd DATE)
+BEGIN
+
+      WHILE dateStart <= dateEnd DO
+        INSERT INTO MyDates (mydate) VALUES (dateStart);
+        SET dateStart = date_add(dateStart, INTERVAL 1 DAY);
+      END WHILE;
+    END;//
+
+   
+CALL filldates('2011-01-01','2011-12-31');
+
+
+DELIMITER //
+CREATE PROCEDURE productpricing()
+BEGIN
+   SELECT Avg(prod_price) AS priceaverage
+   FROM products;
+END //
+DELIMITER ;
+
+
+https://www.brainbell.com/tutorials/MySQL/Using_Stored_Procedures.htm
